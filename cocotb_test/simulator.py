@@ -230,11 +230,9 @@ class Simulator(object):
                 cwd=self.work_dir,
                 env=self.env,
                 bufsize=1,
-            ) as p, open(self.work_dir + "/simlog.log", "w") as file:
+            ) as p:
                 for line in p.stdout:
-                    sys.stdout.buffer.write(line)
-                    escaped_line = self.escape_ansi(line.decode("utf-8"))
-                    file.write(escaped_line)
+                    self.logger.info(line.decode("utf-8").rstrip())
 
             if p.returncode:
                 self.logger.error("Command terminated with error %d" % p.returncode)
