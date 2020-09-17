@@ -246,10 +246,6 @@ class Simulator(object):
 
         return paths_abs
 
-    def escape_ansi(self, line):
-        ansi_escape = re.compile(r"(\x9B|\x1B\[)[0-?]*[ -/]*[@-~]")
-        return ansi_escape.sub("", line)
-
     def execute(self, cmds):
         self.set_env()
         for cmd in cmds:
